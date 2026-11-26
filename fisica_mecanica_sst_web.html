@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10243b">
+<title>Física Mecánica SST</title>
+<style>
+:root{--navy:#10243b;--blue:#1769aa;--cyan:#dff3fa;--bg:#f3f6fa;--ink:#172638;--muted:#627184;--line:#dce4ec;--white:#fff;--green:#13795b}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#10243b,#174d75);color:white;padding:26px 18px 34px}
+.wrap{max-width:980px;margin:auto}header .top{display:flex;align-items:center;gap:13px}.logo{width:48px;height:48px;border-radius:14px;background:#ffffff20;display:grid;place-items:center;font-size:25px}
+h1{font-size:clamp(24px,4vw,34px);margin:0}header p{color:#d7e7f4;margin:10px 0 0;max-width:680px;line-height:1.5}
+main{max-width:980px;margin:-17px auto 40px;padding:0 16px}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:17px}
+.tab{border:1px solid var(--line);background:white;border-radius:12px;padding:13px 8px;font-weight:700;color:var(--navy);cursor:pointer}.tab.active{background:var(--blue);color:white;border-color:var(--blue)}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(18px,4vw,30px);box-shadow:0 8px 25px #19344d0b}
+h2{margin:0 0 7px;font-size:23px}.intro{color:var(--muted);line-height:1.5;margin:0 0 23px}
+label{display:block;font-weight:650;font-size:14px;margin:14px 0 7px}
+select,input{width:100%;padding:13px;border:1px solid #cbd6e1;border-radius:10px;font-size:16px;background:#fff;color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 15px}
+button.calculate{width:100%;margin-top:21px;padding:14px;border:0;border-radius:11px;background:var(--blue);color:white;font-weight:750;font-size:16px;cursor:pointer}
+.result{display:none;margin-top:20px;padding:18px;border-radius:13px;background:#eaf5fb;border:1px solid #c7e3f1}
+.result strong{display:block;color:#0c4f7b;font-size:14px;text-transform:uppercase;letter-spacing:.04em}
+.answer{font-size:25px;font-weight:800;margin:8px 0;color:var(--navy)}.detail{line-height:1.6;color:#34495e;overflow-wrap:anywhere}
+.note{font-size:13px;color:var(--muted);margin-top:16px;line-height:1.5}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.card{padding:16px;border:1px solid var(--line);border-radius:13px;background:#fbfdff}.card b{display:block;margin-bottom:6px}.card span{color:var(--muted);font-size:14px;line-height:1.45}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 28px}
+@media(max-width:600px){.tabs{grid-template-columns:repeat(2,1fr)}.grid,.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="top"><div class="logo">⚙️</div><div><h1>Física Mecánica SST</h1><div style="color:#c7dced;font-size:13px;margin-top:3px">Aprende física aplicada a la prevención</div></div></div><p>Selecciona el módulo, indica qué variable deseas calcular e introduce los datos que conoces. Obtén el resultado y revisa el procedimiento.</p></div></header>
+<main>
+<nav class="tabs" aria-label="Módulos">
+<button class="tab active" data-module="mru">MRU</button><button class="tab" data-module="mrua">MRUA</button><button class="tab" data-module="fall">Caída libre</button><button class="tab" data-module="sst">Ejercicios SST</button>
+</nav>
+<section class="panel" id="calculator">
+<h2 id="title">Movimiento Rectilíneo Uniforme (MRU)</h2>
+<p class="intro" id="description">Movimiento a velocidad constante.</p>
+<div id="form">
+<label for="target">¿Qué deseas calcular?</label>
+<select id="target"></select>
+<div id="inputs" class="grid"></div>
+<button class="calculate" id="calculate">Calcular resultado</button>
+<div class="result" id="result" aria-live="polite"><strong>Resultado</strong><div class="answer" id="answer"></div><div class="detail" id="steps"></div></div>
+</div>
+<div class="note" id="note">Utiliza unidades del Sistema Internacional. Puedes escribir decimales con punto o coma.</div>
+</section>
+<section class="panel" id="sst" style="display:none;margin-top:16px">
+<h2>Física aplicada a la Seguridad y Salud en el Trabajo</h2><p class="intro">Ejemplos para relacionar el movimiento con situaciones laborales. Estos cálculos son educativos y no sustituyen una evaluación de riesgos.</p>
+<div class="cards">
+<div class="card"><b>🚧 Movimiento de vehículos</b><span>Analiza velocidad y distancia recorrida durante el desplazamiento de montacargas o vehículos.</span></div>
+<div class="card"><b>🦺 Distancia de reacción</b><span>Estudia cuánto avanza un vehículo mientras el operador percibe una situación y reacciona.</span></div>
+<div class="card"><b>⚠️ Aceleración</b><span>Relaciona cambios de velocidad con movimientos de equipos y cargas.</span></div>
+<div class="card"><b>🪖 Caída de objetos</b><span>Comprende cómo influyen la altura y el tiempo en la caída de objetos en el entorno laboral.</span></div>
+</div>
+</section>
+</main>
+<footer>Física Mecánica SST · Recurso educativo inicial</footer>
+<script>
+const configs={
+ mru:{title:'Movimiento Rectilíneo Uniforme (MRU)',desc:'Movimiento en línea recta con velocidad constante.',opts:{v:'Velocidad',d:'Distancia',t:'Tiempo'},fields:{d:['Distancia','m'],v:['Velocidad','m/s'],t:['Tiempo','s']}},
+ mrua:{title:'Movimiento Rectilíneo Uniformemente Acelerado (MRUA)',desc:'Movimiento con aceleración constante. Selecciona la variable que deseas encontrar.',opts:{vf:'Velocidad final',vi:'Velocidad inicial',a:'Aceleración',t:'Tiempo',d:'Desplazamiento'},fields:{vi:['Velocidad inicial','m/s'],vf:['Velocidad final','m/s'],a:['Aceleración','m/s²'],t:['Tiempo','s'],d:['Desplazamiento','m']}},
+ fall:{title:'Caída libre',desc:'Modelo ideal: objeto que parte del reposo, sin resistencia del aire (g = 9,81 m/s²).',opts:{t:'Tiempo de caída',h:'Altura de caída'},fields:{h:['Altura','m'],t:['Tiempo','s']}}
+};
+let moduleName='mru';
+const $=id=>document.getElementById(id);
+function fieldsFor(m,target){if(m==='mru')return target==='v'?['d','t']:target==='d'?['v','t']:['d','v'];if(m==='fall')return target==='t'?['h']:['t'];return target==='vf'?['vi','a','t']:target==='vi'?['vf','a','t']:target==='a'?['vi','vf','t']:target==='t'?['vi','vf','a']:['vi','a','t'];}
+function setup(){const c=configs[moduleName];$('title').textContent=c.title;$('description').textContent=c.desc;$('target').innerHTML=Object.entries(c.opts).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');$('result').style.display='none';renderInputs();}
+function renderInputs(){const c=configs[moduleName],target=$('target').value;$('inputs').innerHTML=fieldsFor(moduleName,target).map(k=>`<div><label for="field-${k}">${c.fields[k][0]} (${c.fields[k][1]})</label><input id="field-${k}" type="number" step="any" inputmode="decimal" placeholder="Escribe un valor"></div>`).join('');$('result').style.display='none';}
+function val(k){const el=$('field-'+k),n=Number(el.value);if(el.value.trim()===''||!Number.isFinite(n))throw Error('Completa todos los campos con valores numéricos válidos.');return n;}
+function fmt(n){return Number(n.toFixed(4)).toString();}
+function show(label,value,unit,formula,steps){$('answer').textContent=`${label}: ${fmt(value)} ${unit}`;$('steps').innerHTML=`<b>Fórmula:</b> ${formula}<br><b>Procedimiento:</b> ${steps}`;$('result').style.display='block';}
+function calculate(){try{let r,f,s,u,l;const t=$('target').value;
+if(moduleName==='mru'){let d,v,tm;if(t==='v'){d=val('d');tm=val('t');if(tm<=0)throw Error('El tiempo debe ser mayor que cero.');r=d/tm;f='v = d / t';s=`v = ${d} / ${tm} = ${fmt(r)}`;u='m/s';l='Velocidad';}else if(t==='d'){v=val('v');tm=val('t');r=v*tm;f='d = v × t';s=`d = ${v} × ${tm} = ${fmt(r)}`;u='m';l='Distancia';}else{d=val('d');v=val('v');if(v===0)throw Error('La velocidad no puede ser cero.');r=d/v;f='t = d / v';s=`t = ${d} / ${v} = ${fmt(r)}`;u='s';l='Tiempo';}}
+else if(moduleName==='fall'){const g=9.81;if(t==='t'){const h=val('h');if(h<0)throw Error('La altura no puede ser negativa.');r=Math.sqrt(2*h/g);f='t = √(2h / g)';s=`t = √(2 × ${h} / 9,81) = ${fmt(r)}`;u='s';l='Tiempo de caída';}else{const tm=val('t');if(tm<0)throw Error('El tiempo no puede ser negativo.');r=.5*g*tm*tm;f='h = ½ × g × t²';s=`h = 0,5 × 9,81 × ${tm}² = ${fmt(r)}`;u='m';l='Altura';}}
+else{const vi=t==='vi'?null:val('vi'),vf=t==='vf'?null:val('vf'),a=t==='a'?null:val('a'),tm=t==='t'?null:val('t');if(t==='vf'){r=vi+a*tm;f='vf = vi + a × t';s=`vf = ${vi} + (${a} × ${tm}) = ${fmt(r)}`;u='m/s';l='Velocidad final';}else if(t==='vi'){r=vf-a*tm;f='vi = vf − a × t';s=`vi = ${vf} − (${a} × ${tm}) = ${fmt(r)}`;u='m/s';l='Velocidad inicial';}else if(t==='a'){if(tm===0)throw Error('El tiempo no puede ser cero.');r=(vf-vi)/tm;f='a = (vf − vi) / t';s=`a = (${vf} − ${vi}) / ${tm} = ${fmt(r)}`;u='m/s²';l='Aceleración';}else if(t==='t'){if(a===0)throw Error('La aceleración no puede ser cero.');r=(vf-vi)/a;f='t = (vf − vi) / a';s=`t = (${vf} − ${vi}) / ${a} = ${fmt(r)}`;u='s';l='Tiempo';}else{r=vi*tm+.5*a*tm*tm;f='d = vi × t + ½ × a × t²';s=`d = ${vi} × ${tm} + 0,5 × ${a} × ${tm}² = ${fmt(r)}`;u='m';l='Desplazamiento';}}
+if(!Number.isFinite(r))throw Error('No se pudo obtener un resultado válido. Revisa los datos.');show(l,r,u,f,s);
+}catch(e){$('answer').textContent='No se pudo calcular';$('steps').textContent=e.message;$('result').style.display='block';}}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');moduleName=b.dataset.module;const sst=moduleName==='sst';$('calculator').style.display=sst?'none':'block';$('sst').style.display=sst?'block':'none';if(!sst)setup();}));
+$('target').addEventListener('change',renderInputs);$('calculate').addEventListener('click',calculate);setup();
+</script>
+</body></html>
